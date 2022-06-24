@@ -7,6 +7,7 @@ OBJS	=	$(SRCLIST:%.c=$(OBJDIR)/%.o)
 INCLUDE	=	-I./includes
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
+LFLAGS	=	-lglut -lGLU -lGL -lm
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	mkdir -p $(OBJDIR)
