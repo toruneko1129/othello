@@ -25,6 +25,7 @@ typedef enum t_state
 typedef struct s_othello
 {
 	char	board[BOARD_SIZE][BOARD_SIZE];
+	char	turn;
 }	t_othello;
 
 //display.c

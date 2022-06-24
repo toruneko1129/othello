@@ -1,12 +1,13 @@
 #include "othello.h"
 
-static void	init_board(void)
+static void	init(void)
 {
 	memset(othello.board, EMPTY, sizeof(othello.board));
 	othello.board[3][4] = BLACK;
 	othello.board[4][3] = BLACK;
 	othello.board[3][3] = WHITE;
 	othello.board[4][4] = WHITE;
+	othello.turn = BLACK;
 }
 
 static void	setup_window(void)
@@ -27,12 +28,32 @@ void	display(void)
 	glFlush();
 }
 
+void	mouse(int button, int state, int x, int y)
+{
+	int		i;
+	int		j;
+
+	if (x < 80 || x > 720 || y < 80 || y > 720 || button != GLUT_LEFT_BUTTON
+		|| state != GLUT_DOWN)
+		return ;
+	i = x / 80 - 1;
+	j = y / 80 - 1;
+	if (othello.board[i][j] == EMPTY)
+	{
+		othello.board[i][j] = othello.turn;
+		othello.turn = othello.turn % 2 + 1;
+	}
+	display_stone();
+	glFlush();
+}
+
 int main(int argc, char **argv)
 {
-	init_board();
+	init();
 	glutInit(&argc, argv);
 	setup_window();
 	glutDisplayFunc(display);
+	glutMouseFunc(mouse);
 	glutMainLoop();
 	return (EXIT_SUCCESS);
 }
