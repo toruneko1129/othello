@@ -1,7 +1,8 @@
 NAME	=	othello
 SRCDIR	=	./srcs
 SRCLIST	=	main.c \
-			display.c
+			display.c \
+			update_board.c
 SRCS	=	$(addprefix $(SRCDIR)/, $(SRCLIST))
 OBJDIR	=	./objs
 OBJS	=	$(SRCLIST:%.c=$(OBJDIR)/%.o)

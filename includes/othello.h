@@ -15,12 +15,21 @@
 
 # define BOARD_SIZE 8
 
-typedef enum t_state
+typedef int	t_bool;
+
+typedef enum e_state
 {
 	EMPTY,
+	PLAYABLE,
 	BLACK,
 	WHITE
-}	e_state;
+}	t_state;
+
+typedef enum e_boolean
+{
+	FALSE,
+	TRUE
+}	t_boolean;
 
 typedef struct s_othello
 {
@@ -28,10 +37,14 @@ typedef struct s_othello
 	char	turn;
 }	t_othello;
 
+extern t_othello	g_othello;
+
 //display.c
 void	display_board(void);
 void	display_stone(void);
 
-t_othello	othello;
+//update_board.c
+void	update_board(int x, int y);
+
 
 #endif

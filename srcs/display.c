@@ -38,12 +38,13 @@ void	display_stone(void)
 		j = -1;
 		while (++j < BOARD_SIZE)
 		{
-			if (othello.board[i][j] != BLACK
-				&& othello.board[i][j] != WHITE)
+			if (g_othello.board[i][j] == EMPTY)
 				continue ;
-			if (othello.board[i][j] == BLACK)
+			else if (g_othello.board[i][j] == PLAYABLE)
+				glColor3d(1, 1, 0);
+			else if (g_othello.board[i][j] == BLACK)
 				glColor3d(0, 0, 0);
-			if (othello.board[i][j] == WHITE)
+			else if (g_othello.board[i][j] == WHITE)
 				glColor3d(1, 1, 1);
 			glBegin(GL_POINTS);
 			glVertex2i(120 + 80 * i, 120 + 80 * j);

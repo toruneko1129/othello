@@ -1,13 +1,19 @@
 #include "othello.h"
 
+t_othello	g_othello;
+
 static void	init(void)
 {
-	memset(othello.board, EMPTY, sizeof(othello.board));
-	othello.board[3][4] = BLACK;
-	othello.board[4][3] = BLACK;
-	othello.board[3][3] = WHITE;
-	othello.board[4][4] = WHITE;
-	othello.turn = BLACK;
+	memset(g_othello.board, EMPTY, sizeof(g_othello.board));
+	g_othello.board[3][4] = BLACK;
+	g_othello.board[4][3] = BLACK;
+	g_othello.board[3][3] = WHITE;
+	g_othello.board[4][4] = WHITE;
+	g_othello.board[2][3] = PLAYABLE;
+	g_othello.board[3][2] = PLAYABLE;
+	g_othello.board[4][5] = PLAYABLE;
+	g_othello.board[5][4] = PLAYABLE;
+	g_othello.turn = BLACK;
 }
 
 static void	setup_window(void)
@@ -38,11 +44,8 @@ void	mouse(int button, int state, int x, int y)
 		return ;
 	i = x / 80 - 1;
 	j = y / 80 - 1;
-	if (othello.board[i][j] == EMPTY)
-	{
-		othello.board[i][j] = othello.turn;
-		othello.turn = othello.turn % 2 + 1;
-	}
+	if (g_othello.board[i][j] == PLAYABLE)
+		update_board(i, j);
 	display_stone();
 	glFlush();
 }
