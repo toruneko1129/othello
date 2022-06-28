@@ -39,7 +39,7 @@ void	display_stone(void)
 		while (++j < BOARD_SIZE)
 		{
 			if (g_othello.board[i][j] == EMPTY)
-				continue ;
+				glColor3d(0, 0.5, 0);
 			else if (g_othello.board[i][j] == PLAYABLE)
 				glColor3d(1, 1, 0);
 			else if (g_othello.board[i][j] == BLACK)

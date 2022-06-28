@@ -43,9 +43,23 @@ static void	turn_stone(int x, int y, int dir)
 	}
 }
 
+static t_bool	is_playable(int x, int y)
+{
+	int		dir;
+	t_bool	res;
+
+	dir = -1;
+	res = FALSE;
+	while (++dir < 8)
+		res |= is_turnable(x, y, dir);
+	return (res);
+}
+
 void	update_board(int x, int y)
 {
 	int		dir;
+	int		i;
+	int		j;
 
 	g_othello.board[x][y] = g_othello.turn;
 	dir = -1;
@@ -53,4 +67,18 @@ void	update_board(int x, int y)
 		if (is_turnable(x, y, dir))
 			turn_stone(x, y, dir);
 	g_othello.turn ^= 1;
+	i = -1;
+	while (++i < BOARD_SIZE)
+	{
+		j = -1;
+		while (++j < BOARD_SIZE)
+		{
+			if (g_othello.board[i][j] == BLACK
+				|| g_othello.board[i][j] == WHITE)
+				continue ;
+			g_othello.board[i][j] = EMPTY;
+			if (is_playable(i, j))
+				g_othello.board[i][j] = PLAYABLE;
+		}
+	}
 }
