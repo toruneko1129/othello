@@ -35,6 +35,7 @@ typedef struct s_othello
 {
 	char	board[BOARD_SIZE][BOARD_SIZE];
 	char	turn;
+	t_bool	pass;
 }	t_othello;
 
 extern t_othello	g_othello;

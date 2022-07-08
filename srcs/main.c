@@ -5,6 +5,8 @@ t_othello	g_othello;
 static void	init(void)
 {
 	memset(g_othello.board, EMPTY, sizeof(g_othello.board));
+	g_othello.turn = BLACK;
+	g_othello.pass = FALSE;
 	g_othello.board[3][4] = BLACK;
 	g_othello.board[4][3] = BLACK;
 	g_othello.board[3][3] = WHITE;

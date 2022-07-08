@@ -55,18 +55,29 @@ static t_bool	is_playable(int x, int y)
 	return (res);
 }
 
-void	update_board(int x, int y)
+static t_bool	need_to_pass(void)
 {
-	int		dir;
 	int		i;
 	int		j;
 
-	g_othello.board[x][y] = g_othello.turn;
-	dir = -1;
-	while (++dir < 8)
-		if (is_turnable(x, y, dir))
-			turn_stone(x, y, dir);
-	g_othello.turn ^= 1;
+	i = -1;
+	while (++i < BOARD_SIZE)
+	{
+		j = -1;
+		while (++j < BOARD_SIZE)
+		{
+			if (g_othello.board[i][j] == PLAYABLE)
+				return (FALSE);
+		}
+	}
+	return (TRUE);
+}
+
+static void	update_playable(void)
+{
+	int		i;
+	int		j;
+
 	i = -1;
 	while (++i < BOARD_SIZE)
 	{
@@ -79,6 +90,31 @@ void	update_board(int x, int y)
 			g_othello.board[i][j] = EMPTY;
 			if (is_playable(i, j))
 				g_othello.board[i][j] = PLAYABLE;
+		}
+	}
+}
+
+void	update_board(int x, int y)
+{
+	int		dir;
+
+	g_othello.pass = FALSE;
+	g_othello.board[x][y] = g_othello.turn;
+	dir = -1;
+	while (++dir < 8)
+	{
+		if (is_turnable(x, y, dir))
+			turn_stone(x, y, dir);
+	}
+	g_othello.turn ^= 1;
+	update_playable();
+	if (need_to_pass())
+	{
+		g_othello.turn ^= 1;
+		if (!g_othello.pass)
+		{
+			g_othello.pass = TRUE;
+			update_playable();
 		}
 	}
 }
