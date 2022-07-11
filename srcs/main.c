@@ -16,6 +16,7 @@ static void	init(void)
 	g_othello.board[4][5] = PLAYABLE;
 	g_othello.board[5][4] = PLAYABLE;
 	g_othello.turn = BLACK;
+	print_status();
 }
 
 static void	setup_window(void)
@@ -33,6 +34,8 @@ void	display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	display_board();
 	display_stone();
+	glRasterPos2i(20, 20);
+	glColor3d(0, 0, 0);
 	glFlush();
 }
 
@@ -50,6 +53,7 @@ void	mouse(int button, int state, int x, int y)
 		update_board(i, j);
 	display_stone();
 	glFlush();
+	print_status();
 }
 
 int main(int argc, char **argv)

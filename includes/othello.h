@@ -43,6 +43,7 @@ extern t_othello	g_othello;
 //display.c
 void	display_board(void);
 void	display_stone(void);
+void	print_status(void);
 
 //update_board.c
 void	update_board(int x, int y);

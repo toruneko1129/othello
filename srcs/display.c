@@ -52,3 +52,36 @@ void	display_stone(void)
 		}
 	}
 }
+
+void	print_status(void)
+{
+	int		cnt[4];
+	int		i;
+	int		j;
+
+	memset(cnt, 0, sizeof(cnt));
+	printf("Turn: ");
+	if (g_othello.turn == BLACK)
+		printf("Black\n");
+	else
+		printf("White\n");
+	i = -1;
+	while (++i < BOARD_SIZE)
+	{
+		j = -1;
+		while (++j < BOARD_SIZE)
+			++cnt[(int)g_othello.board[i][j]];
+	}
+	printf("Black: %d\nWhite: %d\n", cnt[BLACK], cnt[WHITE]);
+	if (cnt[PLAYABLE] == 0)
+	{
+		printf("Result: ");
+		if (cnt[BLACK] > cnt[WHITE])
+			printf("Black win\n");
+		else if (cnt[BLACK] < cnt[WHITE])
+			printf("White win\n");
+		else
+			printf("Draw\n");
+	}
+	printf("\n");
+}
