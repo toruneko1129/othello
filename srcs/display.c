@@ -77,11 +77,11 @@ void	print_status(void)
 	{
 		printf("Result: ");
 		if (cnt[BLACK] > cnt[WHITE])
-			printf("Black win\n");
+			printf("Black win!\n");
 		else if (cnt[BLACK] < cnt[WHITE])
-			printf("White win\n");
+			printf("White win!\n");
 		else
-			printf("Draw\n");
+			printf("Draw!\n");
 	}
 	printf("\n");
 }
